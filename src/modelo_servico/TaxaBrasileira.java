@@ -1,6 +1,6 @@
 package modelo_servico;
 
-public class TaxaBrasileira {
+public class TaxaBrasileira implements Taxas {
 
     public double taxa(double valor) { // O método tem o tipo double primitivo porque assumimos que sempre havera um
                                        // valor
@@ -10,5 +10,7 @@ public class TaxaBrasileira {
             return valor * 0.15;
         }
     }
+
+    
 
 }

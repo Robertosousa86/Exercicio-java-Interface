@@ -3,12 +3,13 @@ package modelo_servico;
 import entidades.AluguelCarro;
 import entidades.NotaFiscal;
 
+
 public class ServicosDeAluguel {
 
     private Double precoPorDia;
     private Double precoPorHora;
 
-    private TaxaBrasileira taxaBrasileira;
+    private Taxas taxaBr;
     /*
      * Não é uma boa prática instaciar essa classe porque ela torna o código muito
      * acoplado, de dificil manutenção, com vários pontos de mudança no código, caso
@@ -18,34 +19,10 @@ public class ServicosDeAluguel {
     public ServicosDeAluguel() {
     }
 
-    public ServicosDeAluguel(Double precoPorDia, Double precoPorHora, TaxaBrasileira taxaBrasileira) {
+    public ServicosDeAluguel(Double precoPorDia, Double precoPorHora, Taxas taxaBr) {
         this.precoPorDia = precoPorDia;
         this.precoPorHora = precoPorHora;
-        this.taxaBrasileira = taxaBrasileira;
-    }
-
-    public Double getPrecoPorDia() {
-        return this.precoPorDia;
-    }
-
-    public void setPrecoPorDia(Double precoPorDia) {
-        this.precoPorDia = precoPorDia;
-    }
-
-    public Double getPrecoPorHora() {
-        return this.precoPorHora;
-    }
-
-    public void setPrecoPorHora(Double precoPorHora) {
-        this.precoPorHora = precoPorHora;
-    }
-
-    public TaxaBrasileira getTaxaBrasileira() {
-        return this.taxaBrasileira;
-    }
-
-    public void setTaxaBrasileira(TaxaBrasileira taxaBrasileira) {
-        this.taxaBrasileira = taxaBrasileira;
+        this.taxaBr = taxaBr;
     }
 
     public void gerarNotafiscal(AluguelCarro aluguelCarro) {
@@ -59,7 +36,7 @@ public class ServicosDeAluguel {
         } else {
             pagamentoBasico = precoPorDia * Math.ceil(horas / 24);
         }
-        double taxa = taxaBrasileira.taxa(pagamentoBasico); // calcula o valor do imposto
+        double taxa = taxaBr.taxa(pagamentoBasico); // calcula o valor do imposto
         aluguelCarro.setNotaFiscal(new NotaFiscal(pagamentoBasico, taxa)); // novo objeto do tipo notafiscal asociado ao
                                                                            // objeto aluguelcarro
         /*
